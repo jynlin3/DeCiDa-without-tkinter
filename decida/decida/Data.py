@@ -67,7 +67,7 @@ import re
 import os
 import os.path
 import time
-import tkinter.filedialog
+# import tkinter.filedialog
 ##-- cython syntax:
 #cimport numpy
 #DTYPE = numpy.float64
@@ -77,7 +77,7 @@ import numpy
 import six
 import decida
 from decida.ItclObjectx    import ItclObjectx
-from decida.TextWindow     import TextWindow
+# from decida.TextWindow     import TextWindow
 from decida.EquationParser import EquationParser
 
 class Data(ItclObjectx) :
@@ -483,34 +483,34 @@ class Data(ItclObjectx) :
     # METHOD: twin
     # PURPOSE: display data in text-window
     #==========================================================================
-    def twin(self) :
-        """ display data in text-window.
+    # def twin(self) :
+    #     """ display data in text-window.
 
-        **results**:
+    #     **results**:
 
-            * Display data in a TextWindow object, with columns lined-up.
+    #         * Display data in a TextWindow object, with columns lined-up.
 
-        **example**:
+    #     **example**:
 
-            >>> from decida.Data import Data
-            >>> d = Data()
-            >>> d.read("data.csv")
-            >>> d.twin()
+    #         >>> from decida.Data import Data
+    #         >>> d = Data()
+    #         >>> d.read("data.csv")
+    #         >>> d.twin()
 
-        """
-        lines = []
-        lines.append(" ".join(self.names()))
-        for row in range(0, self.nrows()):
-            line = []
-            for col in range(0, self.ncols()):
-                line.append(str(self.get_entry(row, col)))
-            lines.append(" ".join(line))
-        lines = "\n".join(lines)
-        tw = TextWindow(text_height=30, wait=False, destroy=False)
-        tw.enter(lines)
-        tw.lineup()
-        tw.wait("dismiss")
-        tw.__del__()
+    #     """
+    #     lines = []
+    #     lines.append(" ".join(self.names()))
+    #     for row in range(0, self.nrows()):
+    #         line = []
+    #         for col in range(0, self.ncols()):
+    #             line.append(str(self.get_entry(row, col)))
+    #         lines.append(" ".join(line))
+    #     lines = "\n".join(lines)
+    #     tw = TextWindow(text_height=30, wait=False, destroy=False)
+    #     tw.enter(lines)
+    #     tw.lineup()
+    #     tw.wait("dismiss")
+    #     tw.__del__()
     #==========================================================================
     # METHOD: ncols
     # PURPOSE: return number of columns in data
@@ -5107,9 +5107,10 @@ class Data(ItclObjectx) :
 
         """
         if vcsvfile is None :
-            vcsvfile = tkinter.filedialog.asksaveasfilename(title="VCSV-format filename to write? ", initialdir=os.getcwd(), defaultextension=".vcsv")
-            if not vcsvfile :
-                return False
+            return False
+            # vcsvfile = tkinter.filedialog.asksaveasfilename(title="VCSV-format filename to write? ", initialdir=os.getcwd(), defaultextension=".vcsv")
+            # if not vcsvfile :
+            #     return False
         if xcol is None :
             xcol = self.names()[0]
         if not xcol in self.names():
@@ -5165,9 +5166,10 @@ class Data(ItclObjectx) :
 
         """
         if ssvfile is None :
-            ssvfile = tkinter.filedialog.asksaveasfilename(title="SSV-format filename to write? ", initialdir=os.getcwd(), defaultextension=".col")
-            if not ssvfile :
-                return False
+            # ssvfile = tkinter.filedialog.asksaveasfilename(title="SSV-format filename to write? ", initialdir=os.getcwd(), defaultextension=".col")
+            # if not ssvfile :
+            #     return False
+            return False
         f = open(ssvfile, "w")
         f.write(" ".join(self.names()) + "\n")
         for i in range(0, self.nrows()) :
@@ -5211,9 +5213,10 @@ class Data(ItclObjectx) :
             >>> d.write_csv("data1.csv", column_limit=None)
         """
         if csvfile is None :
-            csvfile = tkinter.filedialog.asksaveasfilename(title="CSV-format filename to write? ", initialdir=os.getcwd(), defaultextension=".csv")
-            if not csvfile :
-                return False
+            return False
+            # csvfile = tkinter.filedialog.asksaveasfilename(title="CSV-format filename to write? ", initialdir=os.getcwd(), defaultextension=".csv")
+            # if not csvfile :
+            #     return False
         f = open(csvfile, "w")
         if column_limit is not None :
             lout = []
@@ -5279,9 +5282,10 @@ class Data(ItclObjectx) :
             >>> d.write_nutmeg("data.raw", first_vars=True)
         """
         if rawfile is None :
-            rawfile = tkinter.filedialog.asksaveasfilename(title="nutmeg-format filename to write? ", initialdir=os.getcwd(), defaultextension=".raw")
-            if not rawfile :
-                return False
+            return False
+            # rawfile = tkinter.filedialog.asksaveasfilename(title="nutmeg-format filename to write? ", initialdir=os.getcwd(), defaultextension=".raw")
+            # if not rawfile :
+            #     return False
         timestamp = time.time()
         datetime  = time.asctime(time.localtime(timestamp))
         f = open(rawfile, "w")
@@ -5357,9 +5361,10 @@ class Data(ItclObjectx) :
 
         """
         if pwlfile is None :
-            pwlfile = tkinter.filedialog.asksaveasfilename(title="PWL-format filename to write? ", initialdir=os.getcwd(), defaultextension=".pwl")
-            if not pwlfile :
-                return False
+            return False
+            # pwlfile = tkinter.filedialog.asksaveasfilename(title="PWL-format filename to write? ", initialdir=os.getcwd(), defaultextension=".pwl")
+            # if not pwlfile :
+            #     return False
         xcol  = cols[0]
         ycols = cols[1:]
         f = open(pwlfile, "w")
@@ -5424,9 +5429,10 @@ class Data(ItclObjectx) :
 
         """
         if not filename :
-            filename = tkinter.filedialog.askopenfilename(title="Data File to read?", initialdir=os.getcwd())
-            if not filename :
-                return False
+            return False
+            # filename = tkinter.filedialog.askopenfilename(title="Data File to read?", initialdir=os.getcwd())
+            # if not filename :
+            #     return False
         if not os.path.exists(filename) :
             print("data file " + filename + " doesn't exist")
             return False
@@ -5626,9 +5632,10 @@ class Data(ItclObjectx) :
 
         """
         if not ssvfile :
-            ssvfile = tkinter.filedialog.askopenfilename(title="SSV-format File to read?", initialdir=os.getcwd(), defaultextension=".col")
-            if not ssvfile :
-                return False
+            return False
+            # ssvfile = tkinter.filedialog.askopenfilename(title="SSV-format File to read?", initialdir=os.getcwd(), defaultextension=".col")
+            # if not ssvfile :
+            #     return False
         if not os.path.exists(ssvfile) :
             print("SSV-format file " + ssvfile + " doesn't exist")
             return False
@@ -5725,9 +5732,10 @@ class Data(ItclObjectx) :
 
         """
         if not csvfile :
-            csvfile = tkinter.filedialog.askopenfilename(title="CSV-format File to read?", initialdir=os.getcwd(), defaultextension=".csv")
-            if not csvfile :
-                return False
+            return False
+            # csvfile = tkinter.filedialog.askopenfilename(title="CSV-format File to read?", initialdir=os.getcwd(), defaultextension=".csv")
+            # if not csvfile :
+            #     return False
         if not os.path.exists(csvfile) :
             print("CSV-format file " + csvfile + " doesn't exist")
             return False
@@ -5819,9 +5827,10 @@ class Data(ItclObjectx) :
 
         """
         if not vcsvfile :
-            vcsvfile = tkinter.filedialog.askopenfilename(title="VCSV-format File to read?", initialdir=os.getcwd(), defaultextension=".vcsv")
-            if not vcsvfile :
-                return False
+            return False
+            # vcsvfile = tkinter.filedialog.askopenfilename(title="VCSV-format File to read?", initialdir=os.getcwd(), defaultextension=".vcsv")
+            # if not vcsvfile :
+            #     return False
         if not os.path.exists(vcsvfile) :
             print("VCSV-format file " + vcsvfile + " doesn't exist")
             return False
@@ -5970,9 +5979,10 @@ class Data(ItclObjectx) :
         forward        = False
         log            = False
         if not rawfile :
-            rawfile = tkinter.filedialog.askopenfilename(title="nutmeg-format File to read?", initialdir=os.getcwd(), defaultextension=".raw")
-            if not rawfile :
-                return False
+            return False
+            # rawfile = tkinter.filedialog.askopenfilename(title="nutmeg-format File to read?", initialdir=os.getcwd(), defaultextension=".raw")
+            # if not rawfile :
+            #     return False
         if not os.path.exists(rawfile) :
             print("nutmeg-format file " + rawfile + " doesn't exist")
             return False
@@ -6217,9 +6227,10 @@ class Data(ItclObjectx) :
 
         """
         if not csdffile :
-            csdffile = tkinter.filedialog.askopenfilename(title="CSDF-format File to read?", initialdir=os.getcwd(), defaultextension=".csdf")
-            if not csdffile :
-                return False
+            return False
+            # csdffile = tkinter.filedialog.askopenfilename(title="CSDF-format File to read?", initialdir=os.getcwd(), defaultextension=".csdf")
+            # if not csdffile :
+            #     return False
         if not os.path.exists(csdffile) :
             print("CSDF-format file " + csdffile + " doesn't exist")
             return False
@@ -6355,9 +6366,10 @@ class Data(ItclObjectx) :
 
         """
         if not hspicefile :
-            hspicefile = tkinter.filedialog.askopenfilename(title="HSpice-format File to read?", initialdir=os.getcwd(), defaultextension=".tr0")
-            if not hspicefile :
-                return False
+            return False
+            # hspicefile = tkinter.filedialog.askopenfilename(title="HSpice-format File to read?", initialdir=os.getcwd(), defaultextension=".tr0")
+            # if not hspicefile :
+            #     return False
         if not os.path.exists(hspicefile) :
             print("HSpice-format file " + hspicefile + " doesn't exist")
             return False
@@ -6611,9 +6623,10 @@ class Data(ItclObjectx) :
 
         """
         if not utmostfile :
-            utmostfile = tkinter.filedialog.askopenfilename(title="UTMOST-IV-format File to read?", initialdir=os.getcwd(), defaultextension=".uds")
-            if not utmostfile :
-                return False
+            return False
+            # utmostfile = tkinter.filedialog.askopenfilename(title="UTMOST-IV-format File to read?", initialdir=os.getcwd(), defaultextension=".uds")
+            # if not utmostfile :
+            #     return False
         if not os.path.exists(utmostfile) :
             print("UTMOST-IV-format file " + utmostfile + " doesn't exist")
             return False
@@ -6821,9 +6834,10 @@ class Data(ItclObjectx) :
 
         """
         if not psffile :
-            psffile = tkinter.filedialog.askopenfilename(title="PSF-ASCII-format File to read?", initialdir=os.getcwd(), defaultextension=".tran")
-            if not psffile :
-                return False
+            return False
+            # psffile = tkinter.filedialog.askopenfilename(title="PSF-ASCII-format File to read?", initialdir=os.getcwd(), defaultextension=".tran")
+            # if not psffile :
+            #     return False
         if not os.path.exists(psffile) :
             print("PSF-ASCII-format file " + psffile + " doesn't exist")
             return False
@@ -6969,24 +6983,24 @@ class Data(ItclObjectx) :
         # get file name if not specified
         #---------------------------------------------------------------------
         filetype = "Cadence Spectre S-parameter File"
-        if not filename :
-            if sys.platform == "darwin" :
-                filename = tkinter.filedialog.askopenfilename(
-                    title="%s to read?" % (filetype),
-                    initialdir=os.getcwd(),
-                    defaultextension=".data",
-                )
-            else :
-                filename = tkinter.filedialog.askopenfilename(
-                    title="%s to read?" % (filetype),
-                    initialdir=os.getcwd(),
-                    defaultextension=".data",
-                    filetypes = (
-                        ("sspar files", "*.data"),
-                        ("sspar files", "*.sp*"),
-                        ("all files", "*")
-                    )
-                )
+        # if not filename :
+        #     if sys.platform == "darwin" :
+        #         filename = tkinter.filedialog.askopenfilename(
+        #             title="%s to read?" % (filetype),
+        #             initialdir=os.getcwd(),
+        #             defaultextension=".data",
+        #         )
+        #     else :
+        #         filename = tkinter.filedialog.askopenfilename(
+        #             title="%s to read?" % (filetype),
+        #             initialdir=os.getcwd(),
+        #             defaultextension=".data",
+        #             filetypes = (
+        #                 ("sspar files", "*.data"),
+        #                 ("sspar files", "*.sp*"),
+        #                 ("all files", "*")
+        #             )
+        #         )
         if not filename :
             return False
         if not os.path.exists(filename) :
@@ -7126,23 +7140,23 @@ class Data(ItclObjectx) :
         # get file name if not specified
         #---------------------------------------------------------------------
         filetype = "Touchstone S-parameter File"
-        if not filename :
-            if sys.platform == "darwin" :
-                filename = tkinter.filedialog.askopenfilename(
-                    title="%s to read?" % (filetype),
-                    initialdir=os.getcwd(),
-                    defaultextension=".data",
-                )
-            else:
-                filename = tkinter.filedialog.askopenfilename(
-                    title="%s to read?" % (filetype),
-                    initialdir=os.getcwd(),
-                    defaultextension=".data",
-                    filetypes = (
-                        ("touchstone files", "*.s?p"),
-                        ("all files", "*")
-                    )
-                )
+        # if not filename :
+        #     if sys.platform == "darwin" :
+        #         filename = tkinter.filedialog.askopenfilename(
+        #             title="%s to read?" % (filetype),
+        #             initialdir=os.getcwd(),
+        #             defaultextension=".data",
+        #         )
+        #     else:
+        #         filename = tkinter.filedialog.askopenfilename(
+        #             title="%s to read?" % (filetype),
+        #             initialdir=os.getcwd(),
+        #             defaultextension=".data",
+        #             filetypes = (
+        #                 ("touchstone files", "*.s?p"),
+        #                 ("all files", "*")
+        #             )
+        #         )
         if not filename :
             return False
         if not os.path.exists(filename) :
